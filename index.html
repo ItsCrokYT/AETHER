@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AETHER | Portfolio Inmersivo</title>
+    
+    <!-- Librerías -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;800&family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <!-- ESTILOS (Orden Importante) -->
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/gallery-special.css">
+    <link rel="stylesheet" href="css/portfolio-immersivo.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="theme-pure-glass custom-cursor-active">
+
+    <!-- CURSOR PERSONALIZADO -->
+    <div class="custom-cursor" id="cursor"></div>
+
+    <!-- NAVBAR FIJA -->
+    <nav class="fixed top-0 w-full p-6 flex justify-between items-center z-50 transition-all duration-300" id="navbar">
+        <a href="#hero" class="text-2xl font-bold tracking-widest text-white hover-target mix-blend-difference">AETHER<span class="text-[var(--color-primary)]">.IO</span></a>
+        
+        <div class="hidden md:flex gap-8 font-mono text-sm tracking-widest text-white/90 items-center">
+            <a href="#hero" class="hover:opacity-50 transition-opacity hover-target">INICIO</a>
+            <a href="#info" class="hover:opacity-50 transition-opacity hover-target">NOSOTROS</a>
+            <a href="#galeria" class="hover:opacity-50 transition-opacity hover-target">OBRAS</a>
+            <a href="#servicios" class="hover:opacity-50 transition-opacity hover-target">SERVICIOS</a>
+            <a href="#portafolio-immersivo" class="hover:opacity-50 transition-opacity hover-target">PORTAFOLIO</a>
+            <a href="#render-3d" class="hover:opacity-50 transition-opacity hover-target text-[var(--color-primary)]">3D LAB</a>
+            <a href="#contacto" class="hover:opacity-50 transition-opacity hover-target">CONTACTO</a>
+            
+            <!-- Botón de Tema (Desktop) -->
+            <button id="theme-toggle" class="glass-btn-sm hover-target ml-4" title="Cambiar Atmósfera">
+                <i class="ph ph-aperture"></i>
+            </button>
+        </div>
+
+        <!-- Botón Menú Móvil -->
+        <div class="flex items-center gap-4 md:hidden">
+            <button id="theme-toggle-mobile" class="glass-btn-sm hover-target" title="Cambiar Atmósfera">
+                <i class="ph ph-aperture"></i>
+            </button>
+            <button id="menu-toggle" class="text-2xl text-white hover:text-[var(--color-primary)] transition-colors hover-target">
+                <i class="ph ph-list"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- MENÚ DESPLEGABLE (MÓVIL) -->
+    <div id="nav-overlay" class="fixed inset-0 bg-black/95 z-40 transform -translate-y-full transition-transform duration-700 ease-in-out flex flex-col justify-center items-center text-center backdrop-blur-xl">
+        <div class="space-y-8">
+            <a href="#hero" class="nav-link block text-4xl text-white hover:opacity-50">INICIO</a>
+            <a href="#servicios" class="nav-link block text-4xl text-white hover:opacity-50">SERVICIOS</a>
+            <a href="#portafolio-immersivo" class="nav-link block text-4xl text-white hover:opacity-50">PORTAFOLIO</a>
+            <a href="#galeria" class="nav-link block text-4xl text-white hover:opacity-50">GALERÍA</a>
+            <a href="#render-3d" class="nav-link block text-4xl text-white hover:opacity-50">3D LAB</a>
+            <a href="#contacto" class="nav-link block text-4xl text-white hover:opacity-50">CONTACTO</a>
+        </div>
+        <button id="close-menu" class="absolute bottom-10 text-white text-sm tracking-widest hover-target">CERRAR MENÚ</button>
+    </div>
+
+    <!-- Botón Volver Arriba -->
+    <button id="scrollTopBtn" class="scroll-top-btn hover-target" aria-label="Volver arriba">
+        <i class="ph ph-arrow-up"></i>
+    </button>
+
+    <!-- 1. HERO SECTION -->
+    <section id="hero" class="relative h-screen w-full flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <canvas id="mercury-canvas"></canvas>
+        </div>
+        <div class="relative z-10 text-center p-4">
+            <h1 class="hero-title mix-blend-overlay">AETHER</h1>
+            <p class="hero-subtitle text-[var(--color-primary)]">ARTE DIGITAL & EXPERIENCIAS</p>
+            <a href="#galeria" class="mt-16 inline-block opacity-50 hover:opacity-100 transition-opacity hover-target animate-bounce">
+                <i class="ph ph-caret-down text-3xl text-white"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- 2. INFO -->
+    <section id="info" class="section-padding relative z-10">
+        <div class="container mx-auto px-6">
+            <div class="glass-panel mx-auto text-center fade-in-scroll">
+                <h2 class="text-3xl md:text-5xl font-bold mb-6 text-white tracking-tight">LA VISIÓN</h2>
+                <p class="text-lg md:text-xl opacity-70 leading-relaxed max-w-3xl mx-auto font-light">
+                    Diseñamos interfaces que se sienten vivas. Nuestro enfoque en el <span class="text-white font-normal">Liquid Glass</span> crea una profundidad visual que invita a tocar la pantalla.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. GALERÍA VISUAL ESPECIAL -->
+    <section id="galeria" class="section-padding relative z-10">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-end mb-16 px-4 fade-in-scroll">
+                <h2 class="text-5xl md:text-7xl font-bold text-white opacity-90">OBRAS</h2>
+                <span class="font-mono text-xs tracking-widest text-white/50 border-b border-white/20 pb-2 hidden md:block">COLECCIÓN RECIENTE</span>
+            </div>
+
+            <div id="visual-gallery" class="gallery-visual-container mode-special fade-in-scroll">
+                <div class="gallery-wrapper">
+                    <div class="gallery-card hover-target" data-src="assets/galeria1/foto1.jpg" data-title="ABSTRACT 3D"><img src="assets/galeria1/foto1.jpg" alt="Obra 1"><div class="card-caption">ABSTRACT 3D</div></div>
+                    <div class="gallery-card hover-target" data-src="assets/galeria1/foto2.jpg" data-title="COLOR POP"><img src="assets/galeria1/foto2.jpg" alt="Obra 2"><div class="card-caption">COLOR POP</div></div>
+                    <div class="gallery-card hover-target" data-src="assets/galeria1/foto3.jpg" data-title="MINIMAL"><img src="assets/galeria1/foto3.jpg" alt="Obra 3"><div class="card-caption">MINIMAL</div></div>
+                    <div class="gallery-card hover-target" data-src="assets/galeria1/foto4.jpg" data-title="GLITCH"><img src="assets/galeria1/foto4.jpg" alt="Obra 4"><div class="card-caption">GLITCH</div></div>
+                    <div class="gallery-card hover-target" data-src="assets/galeria1/foto5.jpg" data-title="CYBERPUNK"><img src="assets/galeria1/foto5.jpg" alt="Obra 5"><div class="card-caption">CYBERPUNK</div></div>
+                    <div class="gallery-card hover-target" data-src="assets/galeria1/foto6.jpg" data-title="VAPOR"><img src="assets/galeria1/foto6.jpg" alt="Obra 6"><div class="card-caption">VAPOR</div></div>
+                    <div class="gallery-card hover-target" data-src="assets/galeria1/foto7.jpg" data-title="FLUID"><img src="assets/galeria1/foto7.jpg" alt="Obra 7"><div class="card-caption">FLUID</div></div>
+                    <div class="gallery-card hover-target" data-src="assets/galeria1/foto8.jpg" data-title="GRADIENT"><img src="assets/galeria1/foto8.jpg" alt="Obra 8"><div class="card-caption">GRADIENTS</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. SERVICIOS -->
+    <section id="servicios" class="section-padding relative z-10">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-16 text-center text-white/40 tracking-widest fade-in-scroll">CAPACIDADES</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-card p-8 rounded-2xl fade-in-scroll hover-target">
+                    <i class="ph ph-cube text-4xl mb-6 text-white"></i>
+                    <h3 class="text-xl font-bold mb-3 text-white">DISEÑO 3D</h3>
+                    <p class="text-sm opacity-60 leading-relaxed">Creación de entornos y objetos tridimensionales interactivos.</p>
+                </div>
+                <div class="glass-card p-8 rounded-2xl fade-in-scroll hover-target" style="transition-delay: 100ms;">
+                    <i class="ph ph-pen-nib text-4xl mb-6 text-white"></i>
+                    <h3 class="text-xl font-bold mb-3 text-white">BRANDING</h3>
+                    <p class="text-sm opacity-60 leading-relaxed">Identidades visuales líquidas y adaptables.</p>
+                </div>
+                <div class="glass-card p-8 rounded-2xl fade-in-scroll hover-target" style="transition-delay: 200ms;">
+                    <i class="ph ph-code text-4xl mb-6 text-white"></i>
+                    <h3 class="text-xl font-bold mb-3 text-white">WEBGL</h3>
+                    <p class="text-sm opacity-60 leading-relaxed">Experiencias inmersivas de alto rendimiento.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. PORTAFOLIO INMERSIVO (WALL INFINITO) -->
+    <section id="portafolio-immersivo" class="relative h-screen w-full overflow-hidden bg-black/20">
+        <div class="absolute top-10 left-10 z-20 mix-blend-difference pointer-events-none">
+            <h2 class="text-6xl font-bold text-white opacity-10 tracking-widest">PORTAFOLIO</h2>
+            <div class="text-xs font-mono text-[var(--color-primary)] mt-2">MODO: INFINITE WALL</div>
+        </div>
+
+        <div id="immersive-viewport">
+            <!-- FILA 1 -->
+            <div class="marquee-row scroll-left">
+                <div class="marquee-track">
+                    <div class="p-item hover-target" data-src="assets/galeria2/imagen1.jpg" data-title="ABSTRACT FLOW"><img src="assets/galeria2/imagen1.jpg" loading="lazy"></div>
+                    <div class="p-item hover-target" data-src="assets/galeria2/imagen2.jpg" data-title="VIBRANT ECHO"><img src="assets/galeria2/imagen2.jpg" loading="lazy"></div>
+                    <div class="p-item hover-target" data-src="assets/galeria2/imagen3.jpg" data-title="SILENT VOID"><img src="assets/galeria2/imagen3.jpg" loading="lazy"></div>
+                    <div class="p-item hover-target" data-src="assets/galeria2/imagen4.jpg" data-title="SYSTEM ERROR"><img src="assets/galeria2/imagen4.jpg" loading="lazy"></div>
+                    <!-- Duplicados -->
+                    <div class="p-item hover-target" data-src="assets/galeria2/imagen1.jpg" data-title="ABSTRACT FLOW"><img src="assets/galeria2/imagen1.jpg" loading="lazy"></div>
+                    <div class="p-item hover-target" data-src="assets/galeria2/imagen2.jpg" data-title="VIBRANT ECHO"><img src="assets/galeria2/imagen2.jpg" loading="lazy"></div>
+                    <div class="p-item hover-target" data-src="assets/galeria2/imagen3.jpg" data-title="SILENT VOID"><img src="assets/galeria2/imagen3.jpg" loading="lazy"></div>
+                    <div class="p-item hover-target" data-src="assets/galeria2/imagen4.jpg" data-title="SYSTEM ERROR"><img src="assets/galeria2/imagen4.jpg" loading="lazy"></div>
+                </div>
+            </div>
+            <!-- FILA 2 -->
+            <div class="marquee-row scroll-right">
+                <div class="marquee-track">
+                    <div class="p-item hover-target" data-src="assets/galeria2/imagen5.jpg" data-title="NEON RAIN"><img src="assets/galeria2/imagen5.jpg" loading="lazy"></div>
+                    <div class="p-item hover-target" data-src="assets/galeria2/imagen6.jpg" data-title="VIRTUAL GOD"><img src="assets/galeria2/imagen6.jpg" loading="lazy"></div>
+                    <div class="p-item hover-target" data-src="assets/galeria2/imagen7.jpg" data-title="LIQUID SOUL"><img src="assets/galeria2/imagen7.jpg" loading="lazy"></div>
+                    <div class="p-item hover-target" data-src="assets/galeria2/imagen8.jpg" data-title="PRISM LIGHT"><img src="assets/galeria2/imagen8.jpg" loading="lazy"></div>
+                    <!-- Duplicados -->
+                    <div class="p-item hover-target" data-src="assets/galeria2/imagen5.jpg" data-title="NEON RAIN"><img src="assets/galeria2/imagen5.jpg" loading="lazy"></div>
+                    <div class="p-item hover-target" data-src="assets/galeria2/imagen6.jpg" data-title="VIRTUAL GOD"><img src="assets/galeria2/imagen6.jpg" loading="lazy"></div>
+                    <div class="p-item hover-target" data-src="assets/galeria2/imagen7.jpg" data-title="LIQUID SOUL"><img src="assets/galeria2/imagen7.jpg" loading="lazy"></div>
+                    <div class="p-item hover-target" data-src="assets/galeria2/imagen8.jpg" data-title="PRISM LIGHT"><img src="assets/galeria2/imagen8.jpg" loading="lazy"></div>
+                </div>
+            </div>
+            <!-- FILA 3 -->
+            <div class="marquee-row scroll-left">
+                <div class="marquee-track">
+                    <div class="p-item hover-target" data-src="assets/galeria2/imagen3.jpg" data-title="SILENT VOID"><img src="assets/galeria2/imagen3.jpg" loading="lazy"></div>
+                    <div class="p-item hover-target" data-src="assets/galeria2/imagen1.jpg" data-title="ABSTRACT FLOW"><img src="assets/galeria2/imagen1.jpg" loading="lazy"></div>
+                    <div class="p-item hover-target" data-src="assets/galeria2/imagen4.jpg" data-title="SYSTEM ERROR"><img src="assets/galeria2/imagen4.jpg" loading="lazy"></div>
+                    <div class="p-item hover-target" data-src="assets/galeria2/imagen2.jpg" data-title="VIBRANT ECHO"><img src="assets/galeria2/imagen2.jpg" loading="lazy"></div>
+                    <!-- Duplicados -->
+                    <div class="p-item hover-target" data-src="assets/galeria2/imagen3.jpg" data-title="SILENT VOID"><img src="assets/galeria2/imagen3.jpg" loading="lazy"></div>
+                    <div class="p-item hover-target" data-src="assets/galeria2/imagen1.jpg" data-title="ABSTRACT FLOW"><img src="assets/galeria2/imagen1.jpg" loading="lazy"></div>
+                    <div class="p-item hover-target" data-src="assets/galeria2/imagen4.jpg" data-title="SYSTEM ERROR"><img src="assets/galeria2/imagen4.jpg" loading="lazy"></div>
+                    <div class="p-item hover-target" data-src="assets/galeria2/imagen2.jpg" data-title="VIBRANT ECHO"><img src="assets/galeria2/imagen2.jpg" loading="lazy"></div>
+                </div>
+            </div>
+            <!-- FILA 4 -->
+            <div class="marquee-row scroll-right">
+                <div class="marquee-track">
+                    <div class="p-item hover-target" data-src="assets/galeria2/imagen8.jpg" data-title="PRISM LIGHT"><img src="assets/galeria2/imagen8.jpg" loading="lazy"></div>
+                    <div class="p-item hover-target" data-src="assets/galeria2/imagen6.jpg" data-title="VIRTUAL GOD"><img src="assets/galeria2/imagen6.jpg" loading="lazy"></div>
+                    <div class="p-item hover-target" data-src="assets/galeria2/imagen5.jpg" data-title="NEON RAIN"><img src="assets/galeria2/imagen5.jpg" loading="lazy"></div>
+                    <div class="p-item hover-target" data-src="assets/galeria2/imagen7.jpg" data-title="LIQUID SOUL"><img src="assets/galeria2/imagen7.jpg" loading="lazy"></div>
+                    <!-- Duplicados -->
+                    <div class="p-item hover-target" data-src="assets/galeria2/imagen8.jpg" data-title="PRISM LIGHT"><img src="assets/galeria2/imagen8.jpg" loading="lazy"></div>
+                    <div class="p-item hover-target" data-src="assets/galeria2/imagen6.jpg" data-title="VIRTUAL GOD"><img src="assets/galeria2/imagen6.jpg" loading="lazy"></div>
+                    <div class="p-item hover-target" data-src="assets/galeria2/imagen5.jpg" data-title="NEON RAIN"><img src="assets/galeria2/imagen5.jpg" loading="lazy"></div>
+                    <div class="p-item hover-target" data-src="assets/galeria2/imagen7.jpg" data-title="LIQUID SOUL"><img src="assets/galeria2/imagen7.jpg" loading="lazy"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. 3D LAB -->
+    <section id="render-3d" class="section-padding relative z-10">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-6xl font-bold mb-16 text-center text-white fade-in-scroll">3D <span class="text-[var(--color-primary)]">LAB</span></h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="glass-card p-2 rounded-3xl overflow-hidden hover-target fade-in-scroll h-[500px] relative group border border-white/10">
+                    <iframe src="https://my.spline.design/interactiveaiwebsite-eM6RrV8oPGrwbdgMwY9KZQD1/" frameborder="0" width="100%" height="100%" class="w-full h-full"></iframe>
+                    <div class="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-black/90 to-transparent pointer-events-none">
+                        <h3 class="text-3xl font-bold text-white mb-2">INTERACTIVE RENDER</h3>
+                        <p class="text-sm text-gray-300 font-mono">SPLINE + WEBGL</p>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-8">
+                    <div class="glass-card p-8 rounded-3xl flex-1 flex flex-col justify-center fade-in-scroll hover-target">
+                        <h3 class="text-2xl font-bold mb-4 text-[var(--color-primary)]">EXPERIMENTOS</h3>
+                        <p class="opacity-80 mb-6">Exploración constante de nuevas técnicas.</p>
+                        <ul class="space-y-2 font-mono text-sm opacity-60">
+                            <li>• Hard Surface Modeling</li>
+                            <li>• Organic Sculpting</li>
+                            <li>• Geometry Nodes</li>
+                        </ul>
+                    </div>
+                    <div class="glass-card p-2 rounded-3xl h-[250px] overflow-hidden relative group fade-in-scroll hover-target">
+                        <img src="assets/galeria2/imagen5.jpg" alt="Render Secundario" class="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <span class="border border-white px-4 py-2 rounded-full text-white text-sm tracking-widest">VER PROYECTO</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="py-32 relative z-10 text-center">
+        <div class="container mx-auto px-6 fade-in-scroll">
+            <h2 class="text-6xl md:text-9xl font-bold opacity-10 mb-8 select-none text-white">HOLA</h2>
+            <div class="glass-panel mx-auto max-w-2xl text-left">
+                <h3 class="text-3xl font-bold mb-8 text-white">INICIA EL VIAJE</h3>
+                <form class="space-y-6">
+                    <div class="group">
+                        <label class="block text-xs font-mono tracking-widest text-white/60 mb-2">NOMBRE</label>
+                        <input type="text" class="w-full bg-white/5 border border-white/10 rounded-lg p-4 text-white focus:outline-none focus:bg-white/10 focus:border-white/30 transition-all backdrop-blur-sm" placeholder="Tu nombre">
+                    </div>
+                    <div class="group">
+                        <label class="block text-xs font-mono tracking-widest text-white/60 mb-2">EMAIL</label>
+                        <input type="email" class="w-full bg-white/5 border border-white/10 rounded-lg p-4 text-white focus:outline-none focus:bg-white/10 focus:border-white/30 transition-all backdrop-blur-sm" placeholder="tu@email.com">
+                    </div>
+                    <div class="group">
+                        <label class="block text-xs font-mono tracking-widest text-white/60 mb-2">MENSAJE</label>
+                        <textarea rows="4" class="w-full bg-white/5 border border-white/10 rounded-lg p-4 text-white focus:outline-none focus:bg-white/10 focus:border-white/30 transition-all backdrop-blur-sm" placeholder="Cuéntanos tu idea..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-4 rounded-full bg-white text-black font-bold text-lg hover:scale-105 transition-transform hover:bg-white/90 shadow-lg shadow-white/10 cursor-pointer">
+                        ENVIAR MENSAJE
+                    </button>
+                </form>
+            </div>
+            <p class="mt-16 text-xs opacity-40 tracking-widest font-mono text-white">ESTUDIO AETHER © 2025</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="relative z-20 mt-20">
+        <div class="glass-footer mx-auto">
+            <div class="container mx-auto px-6 py-12">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                    <div class="space-y-4">
+                        <a href="#hero" class="text-2xl font-bold tracking-widest text-white hover-target">AETHER<span class="text-[var(--color-primary)]">.IO</span></a>
+                        <p class="text-sm opacity-60 leading-relaxed text-white">
+                            Explorando la frontera entre el arte digital y la experiencia de usuario.
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-6 text-[var(--color-primary)] text-sm tracking-widest">EXPLORAR</h4>
+                        <ul class="space-y-3 text-sm opacity-80 text-white">
+                            <li><a href="#galeria" class="hover:text-[var(--color-primary)] transition-colors hover-target">Obras</a></li>
+                            <li><a href="#servicios" class="hover:text-[var(--color-primary)] transition-colors hover-target">Servicios</a></li>
+                            <li><a href="#portafolio-immersivo" class="hover:text-[var(--color-primary)] transition-colors hover-target">Archivo</a></li>
+                            <li><a href="#render-3d" class="hover:text-[var(--color-primary)] transition-colors hover-target">3D Lab</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-6 text-[var(--color-primary)] text-sm tracking-widest">CONECTAR</h4>
+                        <div class="flex gap-4">
+                            <a href="#" class="glass-icon hover-target"><i class="ph ph-instagram-logo"></i></a>
+                            <a href="#" class="glass-icon hover-target"><i class="ph ph-twitter-logo"></i></a>
+                            <a href="#" class="glass-icon hover-target"><i class="ph ph-behance-logo"></i></a>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-6 text-[var(--color-primary)] text-sm tracking-widest">NEWSLETTER</h4>
+                        <form class="space-y-3">
+                            <input type="email" placeholder="tu@email.com" class="glass-input-footer hover-target">
+                            <button class="glass-btn-xs hover-target">SUSCRIBIRSE</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-xs opacity-40 text-white">
+                    <p>&copy; 2025 AETHER STUDIOS. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL DETALLE (LIGHTBOX) -->
+    <div id="detail-modal" class="detail-overlay">
+        <div id="detail-bg" class="detail-bg"></div>
+        <div class="detail-content zoom-in-enter">
+            <button id="close-detail" class="close-btn hover-target">&times;</button>
+            <div class="detail-grid">
+                <div class="detail-img-container">
+                    <img id="detail-img" src="" alt="Detalle">
+                </div>
+                <div class="detail-text flex flex-col justify-center items-start">
+                    <h2 id="detail-title" class="text-4xl font-bold mb-4 text-[var(--color-primary)]">TITULO</h2>
+                    <p id="detail-desc" class="mb-6 opacity-80 text-lg">Descripción del proyecto...</p>
+                    <button id="modal-next" class="hover-target">
+                        SIGUIENTE PROYECTO <i class="ph ph-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- MODAL TEMAS -->
+    <div id="theme-modal" class="modal-overlay">
+        <div class="glass-panel-modal scale-up-enter">
+            <h3 class="mb-6 font-bold text-xl text-white">ATMÓSFERA</h3>
+            <div class="theme-grid"></div>
+            <button id="close-theme" class="mt-6 text-sm opacity-70 hover:opacity-100 hover-target underline text-white">CERRAR</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/portfolio-immersivo.js"></script>
+    
+    <script>
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smooth: true,
+            smoothTouch: false,
+        });
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                lenis.scrollTo(this.getAttribute('href'));
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+/* --- CONTENEDOR PRINCIPAL --- */
+#immersive-viewport {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: transparent;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly; /* Distribuye las 4 filas verticalmente */
+    padding: 80px 0 20px 0; /* Espacio superior para el título */
+}
+
+/* --- FILAS (TRACKS) --- */
+.marquee-row {
+    width: 100%;
+    height: 22vh; /* Altura fija para cada fila */
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    
+    /* Estilo de la fila */
+    border-top: 1px solid rgba(255,255,255,0.03);
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    background: rgba(255,255,255,0.005);
+    
+    /* Inclinación sutil */
+    transform: rotate(-1deg) scale(1.02);
+    transform-origin: center;
+    transition: all 0.3s ease;
+}
+
+.marquee-row:hover {
+    z-index: 10;
+    background: rgba(255,255,255,0.02);
+    transform: rotate(0deg) scale(1.02); /* Se endereza al pasar el mouse */
+}
+
+/* --- PISTA DE MOVIMIENTO --- */
+.marquee-track {
+    display: flex;
+    gap: 20px; /* Espacio entre imágenes */
+    width: max-content; 
+    will-change: transform;
+}
+
+/* --- ANIMACIONES DE SCROLL INFINITO --- */
+.scroll-left .marquee-track {
+    animation: marquee-left 45s linear infinite;
+}
+
+.scroll-right .marquee-track {
+    animation: marquee-right 45s linear infinite;
+}
+
+@keyframes marquee-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } 
+}
+
+@keyframes marquee-right {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+}
+
+/* Pausar animación al interactuar */
+.marquee-row:hover .marquee-track,
+.marquee-row:active .marquee-track {
+    animation-play-state: paused;
+}
+
+/* --- TARJETAS DE IMAGEN (ITEMS) --- */
+.p-item {
+    position: relative; 
+    width: 300px;      /* Ancho fijo escritorio */
+    height: 18vh;      /* Altura relativa a la fila */
+    flex-shrink: 0;    
+    
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    
+    /* Estilo Cristal Sutil */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.02);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.p-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Blanco y Negro por defecto (Desktop) */
+    filter: grayscale(100%) contrast(1.1);
+    transition: filter 0.4s, transform 0.6s;
+    opacity: 0.8;
+    display: block;
+}
+
+/* --- INTERACCIÓN (HOVER DESKTOP) --- */
+.p-item:hover {
+    transform: scale(1.05);
+    z-index: 20;
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.p-item:hover img {
+    filter: grayscale(0%) contrast(1.1); /* Color al hover */
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* Título Hover */
+.p-title-hover {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(3px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+    
+    color: white;
+    font-weight: 600;
+    letter-spacing: 2px;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.p-item:hover .p-title-hover {
+    opacity: 1;
+}
+
+/* --- ANIMACIÓN VUELO (ZOOM AL CLIC) --- */
+.flying-zoom {
+    animation: flyToScreen 0.7s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+    position: fixed !important;
+    z-index: 9999 !important;
+    top: 50% !important;
+    left: 50% !important;
+    
+    /* Centrar el elemento volador basándose en su tamaño original */
+    margin-top: -9vh !important; 
+    margin-left: -150px !important; 
+    
+    transition: none !important;
+    border: 1px solid rgba(255,255,255,0.8) !important;
+    box-shadow: 0 0 50px rgba(255,255,255,0.2) !important;
+    border-radius: 8px !important;
+}
+
+@keyframes flyToScreen {
+    0% { transform: scale(1); opacity: 1; }
+    40% { opacity: 1; }
+    100% { transform: scale(8); opacity: 0; }
+}
+
+/* --- RESPONSIVE MOBILE --- */
+@media (max-width: 768px) {
+    #immersive-viewport {
+        padding-top: 100px;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .marquee-row { 
+        height: 18vh; 
+        transform: none !important; /* Sin rotación en móvil */
+        border: none;
+        background: transparent;
+    }
+    
+    .marquee-track {
+        gap: 15px;
+    }
+
+    .p-item { 
+        width: 60vw; /* Tarjetas más anchas */
+        min-width: 220px;
+        height: 100%;
+        border-radius: 12px;
+    }
+
+    /* MÓVIL: Blanco y Negro por defecto */
+    .p-item img {
+        filter: grayscale(100%);
+        opacity: 0.8;
+    }
+    
+    /* MÓVIL: Color al tocar (:active) o si el dispositivo soporta hover */
+    .p-item:active img,
+    .p-item:hover img {
+        filter: grayscale(0%);
+        opacity: 1;
+    }
+    
+    .p-title-hover { display: none; } /* Ocultar hover en táctil */
+    
+    /* Ajuste animación vuelo móvil */
+    .flying-zoom {
+        margin-left: -30vw !important; /* Ajuste centro móvil */
+    }
+}

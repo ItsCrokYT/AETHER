@@ -1,0 +1,101 @@
+/* --- TEMA BASE: PURE GLASS (Default) --- */
+.theme-pure-glass {
+    --color-bg: #0a0a0a;
+    --color-primary: #ffffff;
+    --color-glass: rgba(255, 255, 255, 0.03);
+    --color-border: rgba(255, 255, 255, 0.15);
+    --color-text: #ffffff;
+    --shadow: 0 20px 40px rgba(0,0,0,0.6);
+    --glow: none; /* Sin brillo neón */
+    --font-display: 'Outfit', sans-serif;
+}
+
+/* --- DEEP OCEAN GLASS --- */
+.theme-ocean {
+    --color-bg: #0f172a; /* Azul noche profundo */
+    --color-primary: #bae6fd; /* Azul cielo muy pálido */
+    --color-glass: rgba(186, 230, 253, 0.05);
+    --color-border: rgba(186, 230, 253, 0.15);
+    --color-text: #f0f9ff;
+    --shadow: 0 20px 40px rgba(15, 23, 42, 0.6);
+}
+
+/* --- ROSE QUARTZ --- */
+.theme-rose {
+    --color-bg: #1a0f0f; /* Vino muy oscuro */
+    --color-primary: #fbcfe8; /* Rosa pastel */
+    --color-glass: rgba(251, 207, 232, 0.05);
+    --color-border: rgba(251, 207, 232, 0.15);
+    --color-text: #fff1f2;
+    --shadow: 0 20px 40px rgba(26, 15, 15, 0.6);
+}
+
+/* --- AMBER RESIN --- */
+.theme-amber {
+    --color-bg: #1c1917; /* Marrón piedra */
+    --color-primary: #fde68a; /* Ámbar suave */
+    --color-glass: rgba(253, 230, 138, 0.05);
+    --color-border: rgba(253, 230, 138, 0.15);
+    --color-text: #fffbeb;
+    --shadow: 0 20px 40px rgba(28, 25, 23, 0.6);
+}
+
+/* --- FROSTED MINT --- */
+.theme-mint {
+    --color-bg: #022c22; /* Verde bosque profundo */
+    --color-primary: #a7f3d0; /* Menta pálido */
+    --color-glass: rgba(167, 243, 208, 0.05);
+    --color-border: rgba(167, 243, 208, 0.15);
+    --color-text: #ecfdf5;
+    --shadow: 0 20px 40px rgba(2, 44, 34, 0.6);
+}
+
+/* --- OBSIDIAN (Monocromático) --- */
+.theme-obsidian {
+    --color-bg: #000000;
+    --color-primary: #e5e5e5;
+    --color-glass: rgba(255, 255, 255, 0.08);
+    --color-border: rgba(255, 255, 255, 0.25);
+    --color-text: #ffffff;
+    --shadow: 0 20px 50px rgba(0,0,0,0.9);
+}
+
+/* --- LIQUID SILVER --- */
+.theme-silver {
+    --color-bg: #111111;
+    --color-primary: #cbd5e1; /* Plata */
+    --color-glass: rgba(203, 213, 225, 0.05);
+    --color-border: rgba(203, 213, 225, 0.2);
+    --color-text: #f1f5f9;
+    --shadow: 0 20px 40px rgba(0,0,0,0.7);
+}
+
+/* --- ROYAL VIOLET --- */
+.theme-violet {
+    --color-bg: #1e1b4b; /* Indigo profundo */
+    --color-primary: #ddd6fe; /* Violeta pálido */
+    --color-glass: rgba(221, 214, 254, 0.05);
+    --color-border: rgba(221, 214, 254, 0.15);
+    --color-text: #f5f3ff;
+    --shadow: 0 20px 40px rgba(30, 27, 75, 0.6);
+}
+
+/* --- CHAMPAGNE --- */
+.theme-champagne {
+    --color-bg: #14100b;
+    --color-primary: #f3e5ab; /* Champagne */
+    --color-glass: rgba(243, 229, 171, 0.05);
+    --color-border: rgba(243, 229, 171, 0.15);
+    --color-text: #fffaf0;
+    --shadow: 0 20px 40px rgba(20, 16, 11, 0.6);
+}
+
+/* --- GLACIER --- */
+.theme-glacier {
+    --color-bg: #082f49; /* Azul ártico oscuro */
+    --color-primary: #e0f2fe; /* Azul hielo */
+    --color-glass: rgba(224, 242, 254, 0.05);
+    --color-border: rgba(224, 242, 254, 0.15);
+    --color-text: #f0f9ff;
+    --shadow: 0 20px 40px rgba(8, 47, 73, 0.6);
+}

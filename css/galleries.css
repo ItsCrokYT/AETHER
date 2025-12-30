@@ -1,0 +1,125 @@
+/* REGLAS COMUNES PARA GALERÍAS EN 3D */
+
+.gallery-container {
+    width: 100%;
+    min-height: 400px;
+}
+
+.g-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.05); /* Cristal */
+    border: 1px solid var(--color-border);
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+.g-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+    transition: opacity 0.4s, transform 0.6s;
+}
+
+.g-item:hover {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 20px var(--color-primary);
+    z-index: 10;
+    transform: scale(1.05); /* Efecto pop */
+}
+.g-item:hover img {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* --- 1. BENTO --- */
+.mode-bento {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    grid-auto-rows: 200px;
+}
+.mode-bento .g-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+.mode-bento .g-item:nth-child(4) { grid-column: span 2; }
+
+/* --- 2. HEXAGONAL --- */
+.mode-hex {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;
+}
+.mode-hex .g-item {
+    width: 200px; height: 220px;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    background: transparent; border: none;
+}
+.mode-hex .g-item img { clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); }
+
+/* --- 3. FOCUS --- */
+.mode-focus {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+}
+.mode-focus .g-item { height: 300px; filter: grayscale(100%); }
+.mode-focus:hover .g-item { opacity: 0.3; }
+.mode-focus .g-item:hover { opacity: 1; filter: grayscale(0%); transform: scale(1.1); }
+
+/* --- 4. ISOMETRIC --- */
+.mode-isometric {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem;
+    transform: rotateX(45deg) rotateZ(-15deg);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    padding: 3rem;
+}
+.mode-isometric .g-item {
+    width: 200px; height: 250px;
+    box-shadow: -10px 10px 20px rgba(0,0,0,0.5);
+}
+.mode-isometric .g-item:hover {
+    transform: translate3d(0, -30px, 50px);
+}
+
+/* --- 5. FILM STRIP (SWIPER) --- */
+.mode-film .swiper-slide {
+    width: 300px; height: 200px;
+    border-radius: 0;
+    border: 8px solid #000;
+    margin-right: 0 !important;
+}
+
+/* --- 6. CHAOS --- */
+.mode-chaos {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+}
+.mode-chaos .g-item:nth-child(odd) { transform: rotate(3deg); }
+.mode-chaos .g-item:nth-child(even) { transform: rotate(-2deg) translateY(20px); }
+
+/* --- 7. CIRCLE --- */
+.mode-circle {
+    display: flex; justify-content: center; gap: 2rem;
+}
+.mode-circle .g-item {
+    width: 250px; height: 250px; border-radius: 50%;
+}
+.mode-circle .g-item:hover { border-radius: 12px; }
+
+/* --- 8. STACK --- */
+.mode-stack {
+    display: flex; justify-content: center; height: 400px; align-items: center;
+}
+.mode-stack .g-item {
+    position: absolute; width: 250px; height: 350px;
+    transition: transform 0.5s ease;
+}
+.mode-stack:hover .g-item:nth-child(1) { transform: translateX(-200px) rotate(-10deg); }
+.mode-stack:hover .g-item:nth-child(2) { transform: translateX(-100px) rotate(-5deg); }
+.mode-stack:hover .g-item:nth-child(3) { transform: translateX(0); z-index: 5; scale: 1.1; }
+.mode-stack:hover .g-item:nth-child(4) { transform: translateX(100px) rotate(5deg); }
+.mode-stack:hover .g-item:nth-child(5) { transform: translateX(200px) rotate(10deg); }
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .mode-bento, .mode-focus, .mode-chaos { grid-template-columns: 1fr; }
+    .mode-bento .g-item { grid-column: auto !important; grid-row: auto !important; }
+    .glass-frame { padding: 1.5rem; transform: scale(0.9); }
+    .hero-title { font-size: 4rem; }
+}
