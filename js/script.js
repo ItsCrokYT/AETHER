@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 1. CANVAS HERO (MERCURIO LÍQUIDO) ---
+    // --- 1. CANVAS HERO ---
     const canvas = document.getElementById('mercury-canvas');
     if (canvas) {
         const ctx = canvas.getContext('2d');
@@ -29,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const time = Date.now() * 0.001;
                 this.vx += Math.sin(time + this.phase) * 0.02; 
                 this.vy += Math.cos(time + this.phase) * 0.02; 
-
                 const dx = mouse.x - this.x;
                 const dy = mouse.y - this.y;
                 const dist = Math.sqrt(dx*dx + dy*dy);
@@ -39,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 this.x += this.vx; this.y += this.vy;
                 this.vx *= 0.96; this.vy *= 0.96;
-
                 if(this.x < -50) this.x = width + 50;
                 if(this.x > width + 50) this.x = -50;
                 if(this.y < -50) this.y = height + 50;
@@ -70,12 +68,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in-scroll').forEach(el => observer.observe(el));
 
-    // --- 3. TEMAS ---
-    const themeToggle = document.getElementById('theme-toggle');
+    // --- 3. TEMAS (SOPORTE MÚLTIPLES BOTONES) ---
     const themeModal = document.getElementById('theme-modal');
     const closeTheme = document.getElementById('close-theme');
     const themeGrid = document.querySelector('.theme-grid');
-    
+    const themeBtns = document.querySelectorAll('#theme-toggle, #theme-toggle-mobile');
+
+    // Asignar evento a todos los botones de tema (Desktop y Móvil)
+    themeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            if(themeModal) themeModal.classList.add('active');
+            // Cerrar menú móvil si está abierto
+            const navOverlay = document.getElementById('nav-overlay');
+            if(navOverlay && navOverlay.classList.contains('open')) {
+                navOverlay.classList.remove('open');
+            }
+        });
+    });
+
+    if(closeTheme) closeTheme.addEventListener('click', () => themeModal.classList.remove('active'));
+
+    // Generar lista de temas
     const themes = [
         { id: 'theme-pure-glass', color: '#ffffff' },
         { id: 'theme-ocean', color: '#bae6fd' },
@@ -101,9 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
             themeGrid.appendChild(dot);
         });
     }
-
-    if(themeToggle) themeToggle.onclick = () => themeModal.classList.add('active');
-    if(closeTheme) closeTheme.onclick = () => themeModal.classList.remove('active');
 
     // --- 4. CURSOR ---
     const cursor = document.getElementById('cursor');
@@ -145,14 +155,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if(closeMenu) closeMenu.addEventListener('click', toggleMenu);
     navLinks.forEach(link => link.addEventListener('click', toggleMenu));
 
-    // --- 7. FAQ ACORDEÓN (NUEVO) ---
+    // --- 7. FAQ ACORDEÓN ---
     const faqs = document.querySelectorAll('.faq-item');
     faqs.forEach(faq => {
         faq.addEventListener('click', () => {
             const content = faq.querySelector('.faq-content');
             const icon = faq.querySelector('i');
             
-            // Cerrar otros
             faqs.forEach(other => {
                 if(other !== faq) {
                     other.querySelector('.faq-content').classList.add('hidden');
@@ -160,7 +169,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // Toggle actual
             content.classList.toggle('hidden');
             if (content.classList.contains('hidden')) {
                 icon.style.transform = 'rotate(0deg)';
